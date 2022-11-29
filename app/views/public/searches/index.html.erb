@@ -1,0 +1,18 @@
+<% unless @search_word.blank? %>
+    <h2><%= @search_word %>の検索結果</h2>
+<% else %>
+    <h2>全件結果</h2>
+<% end %>
+
+<% if @shops.count == 0 %>
+    <p>検索結果はありませんでした。</p>
+<% else %>
+<%= @shops.count%>件
+    <% @shops.each do |shop| %>
+        <div>
+            <%= link_to store_path(shop.id) do%>
+            <%= shop.name %>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>

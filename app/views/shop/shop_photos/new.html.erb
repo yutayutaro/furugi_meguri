@@ -1,0 +1,15 @@
+<% if @photo.errors.any? %>
+    <div class="alert">
+        <ul>
+            <% @photo.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<h1>店舗画像投稿画面</h1>
+<%= form_with model: @photo ,url: shop_shop_photos_path, method: :post do |f| %>
+<%= f.file_field :image, accept: "image/*" %>
+<%= f.text_area :introduction %>
+<%= f.submit '店舗画像を投稿する'%>
+<% end %>

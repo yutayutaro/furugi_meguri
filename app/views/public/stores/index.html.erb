@@ -1,0 +1,7 @@
+<h1>登録店舗一覧</h1>
+<% @bookmarks.each do |f|%>
+<%= link_to store_path(f.id) do %>
+<%= f.shop.name%>
+<% end %>
+<% end %>
+<%= paginate @bookmarks %>

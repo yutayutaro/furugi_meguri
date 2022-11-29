@@ -1,0 +1,2 @@
+module Admin::ShopPhotosHelper
+end

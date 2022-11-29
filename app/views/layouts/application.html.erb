@@ -7,10 +7,97 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+      <header>
+          <h2>Furugi.Meguri</h2>
+        <% if customer_signed_in? %>
+        <div id="sp-menu">
+         <h2>MENU</h2>
+         <ul>
+          <li><%= link_to "登録情報",  customers_mypage_path,class: "box" %></li>
+          <li><%= link_to "about", about_path,class: "box" %></li>
+          <li><%= link_to "マイページ", root_path,class: "box"%></li>
+          <li><%= link_to "レビュー投稿",new_review_path,class: "box" %></li>
+          <li><%= link_to "レビュー一覧",reviews_path,class: "box" %></li>
+          <li><%= link_to "登録店舗一覧", stores_path,class: "box"%></li>
+          <li><%= link_to "登録店舗ブログ一覧", blogs_path,class: "box"%></li>
+          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "box"%></li>
+          <li><%= link_to "退会する", confirm_unsubscribe_path(current_customer.id),class: "box"%></li>
+         </ul>
+         </div>
+
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+    <div class="container">
+     <div class="mx-auto" style="width: 70%;">   
+         <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :keyword, placeholder: 'キーワードから探す' %>
+          <%= f.submit %>
+         <% end %>
+        </div>  
+     </div> 
+        <% elsif admin_signed_in? %>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        <%= link_to "検索画面", admin_root_path %>
+        <% elsif shop_signed_in? %>
+        <div id="sp-menu">
+         <h2>MENU</h2>
+         <ul>
+          <li><%= link_to "マイページ",  shop_root_path,class: "box" %></li>
+          <li><%= link_to "店舗画像投稿", new_shop_shop_photo_path ,class: "box" %></li>
+          <li><%= link_to "店舗画像一覧", shop_shop_photos_path,class: "box"%></li>
+          <li><%= link_to "ブログ投稿", new_shop_blog_path,class: "box" %></li>
+          <li><%= link_to "ブログ一覧", shop_blogs_path,class: "box" %></li>
+          <li><%= link_to "レビュー一覧", shop_reviews_path,class: "box"%></li>
+          <li><%= link_to "ログアウト", destroy_shop_session_path, method: :delete,class: "box"%></li>
+        　<li><%= link_to "退会する", shop_confirm_unsubscribe_path(current_shop.id),class: "box"%></li>      
+         </ul>
+         </div>
+
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+        <% else %>
+            <%if request.path.start_with?('/shop') %>
+            <%elsif request.path.start_with?('/admin') %>
+               
+            <%else%>
+      <div id="sp-menu">
+         <h2>MENU</h2>
+         <ul>
+          <li><%= link_to "ログイン",new_customer_session_path,class: "box" %></li>
+          <li><%= link_to "about", about_path,class: "box" %></li>
+          <li><%= link_to "新規会員登録",new_customer_registration_path ,class: "box"%></li>
+         </ul>
+        </div>
+
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+             <% end %>
+        <% end %>
+      </header>
+      <div class= "container">
+      <div class="mx-auto" style="width: 100%;">   
+      <%= yield %>
+      </div>
+      </div>
   </body>
 </html>

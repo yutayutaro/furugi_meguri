@@ -1,0 +1,16 @@
+<%= form_with model:@customer, url: customers_path,method: :patch do |f| %>
+<table>
+    <thead>
+        <tr>
+            <th>ニックネーム</th>
+            <tb><%= f.text_field :nickname %></tb>
+
+        </tr>
+         <tr>
+            <th>メールアドレス</th>
+            <tb><%= f.text_field :email%></tb>
+        </tr>
+    </thead>
+</table>
+<%= f.submit'変更を保存する'%>
+<% end %>

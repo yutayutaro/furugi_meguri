@@ -1,0 +1,7 @@
+<% @reviews.each do |f|%>
+<%= link_to shop_review_path(f.id) do %>
+<%=f.title%>
+<% end %>
+<%= f.created_at.strftime("%Y/%m/%d")%>
+<% end %>
+<%= paginate @reviews %>

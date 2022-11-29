@@ -1,0 +1,10 @@
+<h1>ブログ(show)</h1>
+<%=@blog.title%>
+<%=@blog.introduction%>
+<% if @blog.image.attached? %>
+<%=image_tag @blog.image%>
+<% else %>
+<% end %>
+<%= @blog.created_at.strftime("%Y/%m/%d")%>
+<%=link_to '編集する', edit_shop_blog_path(params[:id])%>
+<%=link_to '削除する', shop_blog_path(params[:id]), method: :delete %>

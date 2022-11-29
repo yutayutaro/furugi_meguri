@@ -1,0 +1,7 @@
+<h1>店舗画像</h1>
+<%= image_tag @photo.image %>
+
+<%= @photo.introduction%>
+<%= @photo.created_at.strftime("%Y/%m/%d")%>
+<%= link_to '編集する', edit_shop_shop_photo_path(params[:id]) %>
+<%= link_to '削除する', shop_shop_photo_path(params[:id]), method: :delete %>

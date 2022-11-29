@@ -1,0 +1,34 @@
+<%=@store.name%>
+
+
+<%=@store.address%>
+<h3>店舗画像</h3>
+<% @store_photo.each do |f| %>
+<% if f.image.attached? %>
+<%= link_to store_photo_path(f.id) do%>
+<%= image_tag f.image%>
+<% end %>
+<% paginate @store_photo %>
+<% else %>
+<% end %>
+
+<% end %>
+<h3>店舗情報</h3>
+<%=@store.introduction%>
+
+
+
+
+<h3>ブログ</h3>
+<% @blog.each do |f|%>
+<%= link_to blog_path do %>
+<%= f.title%>
+<% end %>
+<% end %>
+
+<%=link_to "レビューする",  new_review_path  %>
+<% if @store.bookmarked_by?(current_customer) %>
+  <td><%= link_to "ブックマークを外す", store_bookmarks_path(@store), method: :delete %></td>
+<% else %>
+  <td><%= link_to "ブックマークをする", store_bookmarks_path(@store), method: :post %></td>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>レビュー編集</h1>
+<%= form_with model: @review, url: shop_review_path(params[:id]), method: :patch do |f| %>
+<%= f.%>
+<%= f.text_field :title%>
+<%= f.textl_area :introduction%>
+<%= f.file_field :image,accept: "image/*" %>
+<%= f.submit 'レビューを投稿する'%>
+<% end %>

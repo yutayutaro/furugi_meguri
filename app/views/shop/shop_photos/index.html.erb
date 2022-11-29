@@ -1,0 +1,8 @@
+<h1>店舗画像一覧</h1>
+<% @photo.each  do |f| %>
+<%= link_to shop_shop_photo_path(f.id) do %>
+<%= f.shop.name %>
+<%= f.created_at.strftime("%Y/%m/%d")%>
+<% end %>
+<% end %>
+<%= paginate @photo %>

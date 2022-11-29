@@ -1,0 +1,13 @@
+<h3>ユーザー登録情報</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ニックネーム<%=current_customer.nickname %></th>
+        </tr>
+         <tr>
+            <th>メールアドレス</th>
+            <td><%=current_customer.email%></td>
+        </tr>
+    </thead>
+</table>
+<%= link_to '登録情報を編集する',customers_mypage_edit_path %>

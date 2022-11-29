@@ -1,0 +1,13 @@
+<h2>会員情報</h2>
+<%= @customer.nickname%>
+<%= @customer.email%>
+<h3>レビュー一覧</h3>
+<% @reviews.each do |review|%>
+<%= link_to admin_review_path(review.id) do %>
+<%= review.title%>
+<% end %>
+<% end %>
+<h3>登録店舗一覧</h3>
+<% @bookmarks.each do |bookmark|%>
+<%= bookmark.shop.name%>
+<% end %>

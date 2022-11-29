@@ -1,0 +1,21 @@
+<h2>登録店舗情報</h2>
+<%=@shop.name%>
+<%=@shop.address%>
+<%=@shop.introduction%>
+<h2>店舗用画像</h2>
+<% @shop_photos.each do |shopphoto|%>
+<%= link_to admin_shop_photo_path(shopphoto.id) do %>
+<%=image_tag shopphoto.image%>
+<% end %>
+<% end %>
+<h2>ブログ一覧</h2>
+<% @blogs.each do |blog|%>
+<% link_to  admin_blog_path(blog.id) do %>
+<%=blog.title%>
+<% end %>
+<% end %>
+
+
+
+
+

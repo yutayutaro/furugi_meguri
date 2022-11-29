@@ -1,0 +1,28 @@
+<table class="table table-hover table-inverse">
+  <% if @range == "Shop" %>
+    <tbody>
+      <% @shops.each do |shop| %>
+        <tr>
+          <td>
+          <%= link_to admin_shop_path(shop.id) do %>
+          <%= shop.name %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td>
+          <%= link_to admin_customer_path(customer.id) do%>
+          <%= customer.nickname %>
+          <% end %>
+          </td>
+          <td><%= customer.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>

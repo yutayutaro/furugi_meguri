@@ -1,0 +1,7 @@
+<%=@review.title%>
+<%=@review.introduction%>
+<% if @review.image.attached? %>
+<%=image_tag @review.image%>
+<% else %>
+<% end %>
+<%=link_to '削除する', admin_review_path(@review.id), method: :delete %>

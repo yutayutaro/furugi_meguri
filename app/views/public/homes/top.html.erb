@@ -1,0 +1,18 @@
+ <%= render 'maps/google_map', maps: @maps,map: @map %>
+ <% if customer_signed_in? %>
+<h3>ブックマーク店舗一覧</h3>
+<% @bookmarks.each do |stores|%>
+<%= link_to store_path(stores.id) do%>
+<%= stores.shop.name%>
+<% end %>
+<% end %>
+<%= paginate @bookmarks %>
+<h3>ブックマーク店舗ブログ一覧</h3>
+<% @blog.each do |blog|%>
+<%= link_to blog_path(blog.id) do%>
+<%= blog.title%>
+<% end %>
+<% end %>
+<%= paginate @blog %>
+<% else %>
+<% end %>

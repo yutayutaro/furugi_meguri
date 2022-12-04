@@ -1,2 +1,16 @@
-<%=image_tag @store_photo.image %>
-<%= @store_photo.introduction%>
+<%= link_to"店舗詳細画面へ",store_path(@store_photo.shop.id),class: "btn btn-primary"%>
+<h1 class="h1-text">店舗画像詳細画面</h1>
+<table class = "table">
+ <tr>
+  <th><%= "店舗名"%></th>
+  <td><%=@store_photo.shop.name%></td>
+ </tr>
+ <tr>
+  <th><%= "画像"%></th>
+  <td><%=image_tag @store_photo.image%></td>
+ </tr>
+ <tr>
+  <th><%= "画像説明"%></th>
+  <td><%= @store_photo.introduction%></td>
+ </tr> 
+</table>

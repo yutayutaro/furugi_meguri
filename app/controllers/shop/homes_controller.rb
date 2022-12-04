@@ -4,9 +4,9 @@ class Shop::HomesController < ApplicationController
       @maps = Map.all
       @map = Map.new
       @bookmarks = Bookmark.where(shop_id: current_shop.id)
-      @shop_photos = ShopPhoto.where(shop_id: current_shop.id)
-      @blogs = Blog.where(shop_id: current_shop.id)
-      @reviews = Review.where(shop_id: current_shop.id)
+      @shop_photos = ShopPhoto.where(shop_id: current_shop.id).page(params[:page])
+      @blogs = Blog.where(shop_id: current_shop.id).page(params[:page])
+      @reviews = Review.where(shop_id: current_shop.id).page(params[:page])
     end
     def edit
     end

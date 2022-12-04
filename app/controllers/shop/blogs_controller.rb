@@ -4,7 +4,7 @@ class Shop::BlogsController < ApplicationController
           @blog = Blog.new
       end
       def index
-          @blog = Blog.page(params[:page])
+          @blogs = Blog.page(params[:page])
       end
       def create
           @blog = Blog.new(blog_params)

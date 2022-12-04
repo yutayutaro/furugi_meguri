@@ -1,24 +1,21 @@
-<h1>レビュー一覧</h1>
+<h1 class="h1-text">レビュー一覧</h1>
 <table class="table">
-    <thead>
-        <tr></tr>
-    </thead>
-    <tbody>
-<% @reviews.each do  |f| %>
-<tr>
-    <th><%="作成日時"%></th>
-    <th><%="タイトル"%></th>        
+ <thead>
+  <tr>
+   <th><%="作成日時"%></th>
+   <th><%="タイトル"%></th>        
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <% @reviews.each do  |review| %>
+   <th><%= review.created_at.strftime("%Y/%m/%d")%></th>
+   <td> <%= link_to review_path(review.id) do %>
+        <%= review.title %></td>
+  </tr>
+    <% end %>
+    <% end %>
+    
 
-</tr>
-
-<th><%= f.created_at.strftime("%Y/%m/%d")%></th>
-
-<td> <%= link_to review_path(f.id) do %>
-    <%= f.title %></td>
-</tr>
-<% end %>
-<% end %>
-<%=  paginate @reviews %>
-
-</tbody>
+ </tbody>
 </table>

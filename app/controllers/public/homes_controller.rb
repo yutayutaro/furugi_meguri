@@ -5,6 +5,7 @@ class Public::HomesController < ApplicationController
           if customer_signed_in? 
         @bookmarks =Bookmark.where(customer_id: current_customer.id).page(params[:page])
         @blog = Blog.where(shop_id: @bookmarks.pluck(:shop_id)).page(params[:page])
+        @shop_photos = ShopPhoto.where(shop_id: @bookmarks.pluck(:shop_id)).page(params[:id])
     end
     end
     def about

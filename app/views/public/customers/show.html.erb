@@ -1,13 +1,14 @@
-<h3>ユーザー登録情報</h3>
-<table>
-    <thead>
-        <tr>
-            <th>ニックネーム<%=current_customer.nickname %></th>
-        </tr>
-         <tr>
-            <th>メールアドレス</th>
-            <td><%=current_customer.email%></td>
-        </tr>
-    </thead>
+<h1 class="h1-text">ユーザー登録情報</h1>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%="ニックネーム"%></th>
+   <td><%=current_customer.nickname %></td>
+  </tr>
+  <tr>
+   <th><%="メールアドレス"%></th>
+   <td><%=current_customer.email%></td>
+  </tr>
+ </tbody>
 </table>
-<%= link_to '登録情報を編集する',customers_mypage_edit_path %>
+<%= link_to '登録情報を編集する',customers_mypage_edit_path,class: "btn btn-warning" %>

@@ -1,4 +1,4 @@
-<h1>ブログ投稿画面</h1>
+<h1 class="h1-text">ブログ投稿画面</h1>
 <% if @blog.errors.any? %>
   <ul>
     <% @blog.errors.full_messages.each do |message| %>
@@ -6,15 +6,24 @@
     <% end %>
   </ul>
 <% end %>
-
-<%= form_with model: @blog, url: shop_blogs_path, method: :post do  |f| %>
-<%=f.label :title %>
-<%= f.text_field :title %></br>
-<%=f.label :introduction %>
-<%= f.text_area :introduction %></br>
-<%= f.label :image %>
-<%= f.file_field :image, accept: "image/*" %></br>
-<%= f.submit '投稿する' %>
+<table class="table">
+ <tbody>
+   <%= form_with model: @blog, url: shop_blogs_path, method: :post do  |blog| %>
+   <tr>
+     <th><%= blog.label :title,"タイトル" %></th>
+     <td><%= blog.text_field :title %></td>
+   </tr>
+   <tr>
+     <th><%= blog.label :introduction,"説明" %></th>
+     <td><%= blog.text_area :introduction %></td>
+   </tr>
+   <tr>
+     <th><%= blog.label :image,"画像" %></th>
+     <td><%= blog.file_field :image, accept: "image/*" %></td>
+   </tr>
+ </tbody>
+</table>
+<%= blog.submit '投稿する',class: "btn btn-success" %>
 <% end %>
 
 

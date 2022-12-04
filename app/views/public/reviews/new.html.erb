@@ -1,4 +1,4 @@
-<h1>レビュー</h1>
+<h1 class="h1-text">レビュー投稿</h1>
 <% if @review.errors.any? %>
   <ul>
     <% @review.errors.full_messages.each do |message| %>
@@ -6,10 +6,27 @@
 <% end %>
   </ul>
 <% end %>
-<%= form_with model: @review, url: reviews_path, local: true, method: :post do |f| %>
-<%= f.select :shop_id, options_from_collection_for_select(Shop.all, :id, :name) %>
-<%= f.text_field :title %>
-<%= f.text_area :introduction %>
-<%= f.file_field :image,accept: "image/*" %>
-<%= f.submit 'レビューを投稿する'%>
-<% end %>
+<table class="table">
+ <tbody>
+    <%= form_with model: @review, url: reviews_path, local: true, method: :post do |f| %>
+    <tr>
+      <th><%=f.label :shop_id, "投稿店舗選択画面"%></th>
+      <td><%= f.select :shop_id, options_from_collection_for_select(@shops, :id, :name) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :title, "タイトル"%></th>
+      <td><%= f.text_field :title %></td>
+    </tr>    
+    <tr>
+      <th><%= f.label :introduction, "レビュー"%></th>
+      <td><%= f.text_area :introduction %></td>
+    </tr>    
+    <tr>
+      <th><%= f.label :image, "画像"%></th>
+      <td><%= f.file_field :image,accept: "image/*" %></td>
+    </tr>  
+    </tbody>
+  </table>  
+    <%= f.submit 'レビューを投稿する',class: "btn btn-success"%>
+
+    <% end %>

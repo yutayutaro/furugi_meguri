@@ -1,5 +1,36 @@
-<%= @blog.shop.name%>
-<%= @blog.title%>
-<%= @blog.introduction%>
-<%= @blog.created_at%>
-<%= link_to '一覧へ戻る',blogs_path %>
+<% if customer_signed_in? %>
+<%= link_to '一覧へ戻る',blogs_path,class: "btn btn-primary" %>
+<% else %>
+<%= link_to"店舗詳細画面へ",store_path(@blog.shop.id),class: "btn btn-primary" %>
+<% end %>
+<h1 class="h1-text">ブログ詳細画面</h1>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%= "店舗名"%></th>    
+   <td><%= @blog.shop.name%></td>
+  </tr>
+  <tr>
+   <th><%= "タイトル"%></th>  
+   <td><%= @blog.title%></td>
+  </tr>
+  <tr>
+   <th><%= "ブログ"%></th>  
+   <td><%= @blog.introduction%></td>
+  </tr>
+  <tr>
+   <th><%= "作成日時"%></th>
+   <td><%= @blog.created_at.strftime("%Y/%m/%d")%></td>
+  </tr>
+  <tr>
+   <th><%= "画像" %></th> 
+   <td>
+       <% if @blog.image.attached? %>
+        <%= image_tag @blog.image%>
+       <% else %>
+       <%="画像はありません"%>
+       <% end %>
+   </td>
+  </tr>
+ </tbody>
+</table>

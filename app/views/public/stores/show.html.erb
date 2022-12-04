@@ -1,7 +1,12 @@
-<%=@store.name%>
+<% if customer_signed_in? %>
+<%= link_to '一覧へ戻る',stores_path, class: "btn btn-primary" %>
+<% end %>
+<h2><%=@store.name+"のページ"%></h2>
 
 
 <%=@store.address%>
+
+
 <h3>店舗画像</h3>
 <% @store_photo.each do |f| %>
 <% if f.image.attached? %>
@@ -13,22 +18,48 @@
 <% end %>
 
 <% end %>
-<h3>店舗情報</h3>
-<%=@store.introduction%>
-
-
-
-
-<h3>ブログ</h3>
-<% @blog.each do |f|%>
-<%= link_to blog_path do %>
-<%= f.title%>
-<% end %>
-<% end %>
-
-<%=link_to "レビューする",  new_review_path  %>
+<h3 class="h3-text">店舗情報</h3>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%= "店舗説明"%></th>    
+   <td><%=@store.introduction%></td>
+  </tr>
+  <tr>
+   <th><%= "営業時間"%></th>  
+   <td><%= ""%></td>
+  </tr>
+  <tr>
+   <th><%= "リンク"%></th>  
+   <td><%= ""%></td>
+  </tr>
+  </tbody>
+ </table>
+<h3 class="h3-text">ブログ</h3>
+<table class="table">
+ <thead>
+  <tr>
+   <th><%="作成日時"%></th>
+   <th><%="タイトル"%></th>        
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <% @blog.each do |blog| %>
+   <th><%= blog.created_at.strftime("%Y/%m/%d")%></th>
+   <td><%= link_to blog_path(blog.id) do %>
+       <%= blog.title%></td>
+  </tr>
+    <% end %>
+    <% end %>
+    <%=  paginate @blog %>
+ </tbody>
+</table>
+<% if customer_signed_in? %>
+<%=link_to "レビューする",  new_review_path,class: "btn btn-success"  %>
 <% if @store.bookmarked_by?(current_customer) %>
-  <td><%= link_to "ブックマークを外す", store_bookmarks_path(@store), method: :delete %></td>
+  <td><%= link_to "ブックマークを外す", store_bookmarks_path(@store), method: :delete,class: "btn btn-danger" %></td>
 <% else %>
-  <td><%= link_to "ブックマークをする", store_bookmarks_path(@store), method: :post %></td>
+  <td><%= link_to "ブックマークをする", store_bookmarks_path(@store), method: :post,class: "btn btn-success" %></td>
+<% end %>
 <% end %>

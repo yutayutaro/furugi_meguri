@@ -6,14 +6,23 @@
 }
 h1 {
   text-align: center;
-  margin: 50px 0;
+
+}
+
+.h1-text {
+  margin: 40px 0px;
+}
+.h3-text {
+  margin: 30px 0px;
+}
+td img {
+ width: 120px ;
 }
 header {
   height:  70px;
   width:  100%;
   background-color: #FFEFD5;
 }
-
 .box {
   height: 300px;
   width: 90%;

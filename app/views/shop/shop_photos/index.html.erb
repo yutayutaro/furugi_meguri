@@ -1,8 +1,22 @@
-<h1>店舗画像一覧</h1>
-<% @photo.each  do |f| %>
-<%= link_to shop_shop_photo_path(f.id) do %>
-<%= f.shop.name %>
-<%= f.created_at.strftime("%Y/%m/%d")%>
-<% end %>
-<% end %>
-<%= paginate @photo %>
+<h1 class="h1-text">店舗画像一覧</h1>
+<table class="table">
+ <thead>
+  <tr>
+     <th><%="作成日時"%></th>
+     <th><%="画像"%></th>
+     <th><%="詳細画面リンク"%></th>
+  </tr>
+ </thead>
+ <tbody>
+     <% @photo.each  do |shop_photos| %>
+  <tr>
+    <th><%= shop_photos.created_at.strftime("%Y/%m/%d")%></th>
+    <td><%=image_tag shop_photos.image%></td>
+    <td><%= link_to shop_shop_photo_path(shop_photos.id) do %>
+        <%= "詳細画面へ" %></td>
+        <% end %>
+    </tr>
+    <% end %>
+    <%= paginate @photo %>
+ </tbody>
+</table>

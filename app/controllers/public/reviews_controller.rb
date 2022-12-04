@@ -7,8 +7,11 @@ class Public::ReviewsController < ApplicationController
          @review = Review.find(params[:id])
         end
         def new
-         @review =Review.new
-        end
+        @review =Review.new
+        #  bookmark = Bookmark.find_by(customer_id: current_customer.id)
+        #  @shop = Shop.where(bookmark_id: bookmark.id)
+        @shops = Shop.where(id: current_customer.bookmarks.pluck(:shop_id))
+        end  
         def create
           @review = Review.new(review_params)
           @review.customer_id = current_customer.id
@@ -19,6 +22,7 @@ class Public::ReviewsController < ApplicationController
           end
         end        
         def edit
+         @review = Review.find(params[:id])   
         end
         def update
         end

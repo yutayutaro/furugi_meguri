@@ -1,16 +1,15 @@
-<%= form_with model:@customer, url: customers_path,method: :patch do |f| %>
-<table>
-    <thead>
-        <tr>
-            <th>ニックネーム</th>
-            <tb><%= f.text_field :nickname %></tb>
-
-        </tr>
-         <tr>
-            <th>メールアドレス</th>
-            <tb><%= f.text_field :email%></tb>
-        </tr>
-    </thead>
+<%= form_with model:@customer, url: customers_path,method: :patch do |customer| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%= customer.label :nickname,"ニックネーム"%></th>
+   <td><%= customer.text_field :nickname %></td>
+  </tr>
+  <tr>
+   <th><%= customer.label :email,"メール"%></th>
+   <td><%= customer.text_field :email%></td>
+  </tr>
+ </tbody>
 </table>
-<%= f.submit'変更を保存する'%>
+<%= customer.submit'変更を保存する',class: "btn btn-success"%>
 <% end %>

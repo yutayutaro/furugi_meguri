@@ -1,3 +1,16 @@
-<%= @shop_photo.shop.name%>
-<%= @shop_photo.introduction%>
-<%= link_to '削除する',admin_shop_photo_path, method: :delete%>
+<h1 class="h1-text">店舗画像詳細画面</h1>
+<table class = "table">
+ <tr>
+  <th><%= "店舗名"%></th>
+  <td><%= @shop_photo.shop.name%></td>
+ </tr>
+ <tr>
+  <th><%= "画像"%></th>
+  <td><%=image_tag @shop_photo.image%></td>
+ </tr>
+ <tr>
+  <th><%= "画像説明"%></th>
+  <td><%= @shop_photo.introduction%></td>
+ </tr> 
+</table>
+<%= link_to '削除する',admin_shop_photo_path, method: :delete,class: "btn btn-danger"%>

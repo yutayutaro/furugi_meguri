@@ -3,7 +3,8 @@ class MapsController < ApplicationController
         @maps = Map.all
         @map = Map.new
     end
-       def create
+    
+    def create
         map = Map.new(map_params)
         if map.save
             if current_shop.present?

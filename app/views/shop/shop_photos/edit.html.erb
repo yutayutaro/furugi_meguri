@@ -1,6 +1,16 @@
-<h1>店舗画像編集</h1>
-<%= form_with model: @photo,url: shop_shop_photo_path, method: :patch do |f|%>
-<%= f.file_field :image, accept:"image/*" %>
-<%= f.text_area :introduction %>
-<%= f.submit '変更を保存する'%>
+<h1 class="h1-text">店舗画像編集</h1>
+<%= form_with model: @photo,url: shop_shop_photo_path, method: :patch do |photo|%>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%= photo.label :image,"画像"%></th>
+   <td><%= photo.file_field :image, accept:"image/*" %></td>
+  </tr>
+  <tr>
+   <th><%= photo.label :introduction,"説明"%></th>
+   <td><%= f.text_area :introduction %></td>
+  </tr>
+ </tbody>
+</table>
+<%= f.submit '変更を保存する',class: "btn btn-success"%>
 <% end %>

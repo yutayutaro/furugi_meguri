@@ -1,4 +1,4 @@
-<h1>TOPページ</h1>
+<h1 class="h1-text">TOPページ</h1>
 <%= render 'maps/google_map', maps: @maps,map: @map %>
 <div>ブックマーク数</div>
 <%= @bookmarks.count%>
@@ -7,21 +7,56 @@
 <%= current_shop.introduction%>
 <%= current_shop.email%>
 <%= link_to "マイページを編集する",shop_mypage_edit_path %>
-<h3>店舗画像一覧</h3>
+<h3 class="h3-text">店舗画像一覧</h3>
+ <div class = "row">
+  <div class = "col-xs-3">
 <% @shop_photos.each do |photo|%>
 <%= link_to shop_shop_photo_path(photo.id) do %>
 <%= image_tag photo.image %>
 <% end %>
 <% end %>
-<h3>ブログ一覧</h3>
-<% @blogs.each do |blog|%>
-<% link_to shop_blog_path(blog.id) do %>
-<%= blog.title%>
-<% end %>
-<% end %>
-<h3>レビュー一覧</h3>
-<% @reviews.each do |review|%>
-<%= link_to  shop_review_path(review.id) do %>
-<%= review.title%>
-<% end %>
-<% end %>
+  </div>
+ </div>
+<h3 class="h3-text">ブログ一覧</h3>
+<table class="table">
+ <thead>
+  <tr>
+   <th><%="作成日時"%></th>
+   <th><%="タイトル"%></th>        
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+      <% @blogs.each do |blog|%>
+   <th><%= blog.created_at.strftime("%Y/%m/%d")%></th>
+   <td><%= link_to shop_blog_path(blog.id) do %>
+       <%= blog.title%></td>
+  </tr>
+    <% end %>
+    <% end %>
+    <%=  paginate @blogs %>
+  </tbody>
+  </table>
+  
+    
+<h3 class="h3-text">レビュー一覧</h3>
+<table class="table">
+ <thead>
+  <tr>
+   <th><%="作成日時"%></th>
+   <th><%="タイトル"%></th>        
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <% @reviews.each do  |review| %>
+   <th><%= review.created_at.strftime("%Y/%m/%d")%></th>
+   <td> <%= link_to shop_review_path(review.id) do %>
+        <%= review.title %></td>
+  </tr>
+    <% end %>
+    <% end %>
+    <%=  paginate @reviews %>
+
+ </tbody>
+</table>

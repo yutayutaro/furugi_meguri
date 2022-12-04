@@ -1,21 +1,59 @@
-<h2>登録店舗情報</h2>
-<%=@shop.name%>
-<%=@shop.address%>
-<%=@shop.introduction%>
-<h2>店舗用画像</h2>
-<% @shop_photos.each do |shopphoto|%>
-<%= link_to admin_shop_photo_path(shopphoto.id) do %>
-<%=image_tag shopphoto.image%>
-<% end %>
-<% end %>
-<h2>ブログ一覧</h2>
-<% @blogs.each do |blog|%>
-<% link_to  admin_blog_path(blog.id) do %>
-<%=blog.title%>
-<% end %>
-<% end %>
+<h1 class="h1-text">登録店舗情報</h1>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%= "店舗名"%></th>
+   <td><%=@shop.name%></td>
+  </tr>
+  <tr>
+   <th><%= "住所"%></th>
+   <td><%=@shop.address%></td>
+  </tr>
+  <tr>
+   <th><%= "店舗説明"%></th>
+   <td><%=@shop.introduction%></td>
+  </tr>  
+ </tbody>
+</table>
+<h3 class="h3-text">店舗用画像一覧</h3>
+<table class = "table">
+ <thead>
+  <tr>
+   <th><%= "作成日時"%></th>
+   <th><%= "画像"%></th>
+   <th><%=""%></th>
+  </tr>     
+ </thead>
+ <tbody>
+  <% @shop_photos.each do |shopphoto|%>
+  <tr>
+   <td><%=shopphoto.created_at.strftime("%Y/%m/%d")%></td>
+   <td>
+        <%=image_tag shopphoto.image%></td>
+   <td><%= link_to"詳細ページへ行く", admin_shop_photo_path(shopphoto.id)  %></td>     
+  </tr> 
+  <% end %>
+  <%= paginate @shop_photos %>
+ </tbody>    
+</table>
+<h3 class="h3-text">ブログ一覧</h3>
+<table class = "table">
+ <thead>
+  <tr>
+   <th><%= "作成日時"%></th>
+   <th><%= "タイトル"%></th>
+  </tr>
+ </thead>
+ <tbody>
+  <% @blogs.each do |blog|%>
+  <tr>
+   <td><%= blog.created_at.strftime("%Y/%m/%d")%></td>
+   <td><%= link_to  admin_blog_path(blog.id) do %>
+        <%=blog.title%>  
+        <% end %></td>
+  </tr>
 
-
-
-
-
+  <% end %>
+  <%= paginate @blogs%>
+ </tbody>
+</table>

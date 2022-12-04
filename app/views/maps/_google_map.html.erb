@@ -20,66 +20,77 @@
 
     // mapの表示関数 
     function initMap() {
-        geocoder = new google.maps.Geocoder()
+        ////let button = document.getElementById("button");
+        //geocoder = new google.maps.Geocoder();
+        //codeAddress(document.getElementById("map_address"));
 
         // mapの初期位置, 縮尺を定義
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: 35.6458437,
-                lng: 139.7046171
-            },
-            zoom: 12,
-        });
+        //map = new google.maps.Map(document.getElementById('map'), {
+            //center: {
+                //lat: 35.6458437,
+                //lng: 139.7046171
+            //},
+            //zoom: 12,
+        //});
 
         // mapsテーブルにあるそれぞれのレコードをmap上に表示 
-        <% maps.each do |m| %>
-           <% if m.address.present? %>
-            (function(){
-            var contentString = "住所：<%= m.address %>"; 
+        <%# maps.each do |m| %>
+           <%# if m.address.present? %>
+            ////(function(){
+            //var contentString = "住所：<%#= m.address %>"; 
 
             // マーカーを立てる
-            var marker = new google.maps.Marker({
-                position:{lat: <%= m.latitude %>, lng: <%= m.longitude %>},
+            //var marker = new google.maps.Marker({
+                //position:{lat: <%#= m.latitude %>, lng: <%#= m.longitude %>},
                 //position:{lat: '37', lng: '120'},
-                map: map,
-                title: contentString
-            });
+                //map: map,
+                //title: contentString
+            //});
 
             // 情報ウィンドウ(吹き出し)の定義
             // 投稿の詳細ページへのリンクも
-            var infowindow = new google.maps.InfoWindow({
-                position: {lat: <%= m.latitude %>, lng: <%= m.longitude %>},
-                //position:{lat: '37', lng: '120'},
-                content: "<a href='<%= map_url(m.id) %>' target='_blank'><%= m.address %></a>"
-            });
+            //var infowindow = new google.maps.InfoWindow({
+                //position: {lat: <%#= m.latitude %>, lng: <%#= m.longitude %>},
+                ////position:{lat: '37', lng: '120'},
+                //content: "<a href='<%#= map_url(m.id) %>' target='_blank'><%#= m.address %></a>"
+            //});
 
             // クリックしたときに情報ウィンドウを表示
-            marker.addListener('click', function() {
-            infowindow.open(map, marker);
-            });
+            //marker.addListener('click', function() {
+            //infowindow.open(map, marker);
+            //});
 
-            })();
-            <% end %>
-        <% end %>
+            //})();
+            <%# end %>
+        <%# end %>
     }
 
     let geocoder
 
-    // 地図検索関数
+    // 地図検索関数(緯度経度の情報を登録させたい)
     function codeAddress() {
-        let inputAddress = document.getElementById('address').value;
-
+        // 入力された住所を取得
+        let inputAddress = document.getElementById('map_address').value;
+        geocoder = new google.maps.Geocoder();
+        
         geocoder.geocode({
             'address': inputAddress
         }, function (results, status) {
             if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
+                console.log('OKです');
+                console.log(results[0].geometry.location);
+                // 緯度の値を取得
+                console.log(results[0].geometry.location.lat());
+                // 経度の値を取得
+                console.log(results[0].geometry.location.lng());
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
 
             display.textContent = "検索結果：" + results[ 0 ].geometry.location
+            console,log("abc");
+            console.log(results[ 0 ].geometry.location);
             } else {
                 alert('該当する結果がありませんでした：' + status);
             }
@@ -88,8 +99,8 @@
 </script>
 
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['AIzaSyD9R37BPO9VJeRQCDc1EbEpyHHs1i6TdGQ'] %>&callback=initMap"
-    async defer>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9R37BPO9VJeRQCDc1EbEpyHHs1i6TdGQ&callback=initMap"
+    >
 </script>
 
 <h3>場所投稿フォーム</h3>
@@ -100,7 +111,7 @@
     <%= f.text_field :address, size: "50x1" %>
     </p>
 
-    <%= f.submit "送信"%>
+    <%= f.submit "送信", id: "button", onclick: "return codeAddress()" %>
 <% end %>
 
 <h3>場所一覧</h3>

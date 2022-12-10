@@ -2,6 +2,7 @@
 <%= link_to '一覧へ戻る',stores_path, class: "btn btn-primary" %>
 <% end %>
 <h2><%=@store.name+"のページ"%></h2>
+<div id='map'></div>
 
 
 <%=@store.address%>
@@ -63,3 +64,35 @@
   <td><%= link_to "ブックマークをする", store_bookmarks_path(@store), method: :post,class: "btn btn-success" %></td>
 <% end %>
 <% end %>
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<script>
+    let map
+
+    // mapの表示関数 
+    function initMap() {
+        geocoder = new google.maps.Geocoder()
+
+        // mapの初期位置, 縮尺を定義
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: <%= @store.latitude%>,
+                lng: <%= @store.longitude%>
+            },
+            zoom: 15,
+        });
+          new google.maps.Marker({
+              position:{lat: <%= @store.latitude %>, lng: <%= @store.longitude %>},
+              map: map
+              
+         });
+    }
+</script>    
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"  
+    async defer>
+</script>

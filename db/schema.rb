@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_135118) do
+ActiveRecord::Schema.define(version: 2022_12_04_140955) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,11 @@ ActiveRecord::Schema.define(version: 2022_11_29_135118) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "map_queries", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "maps", force: :cascade do |t|
     t.string "address"
     t.float "latitude"
@@ -134,6 +139,8 @@ ActiveRecord::Schema.define(version: 2022_11_29_135118) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "opening_hours"
+    t.float "longitude"
+    t.float "latitude"
     t.index ["email"], name: "index_shops_on_email", unique: true
     t.index ["reset_password_token"], name: "index_shops_on_reset_password_token", unique: true
   end

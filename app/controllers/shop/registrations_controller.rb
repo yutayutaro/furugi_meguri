@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Shop::RegistrationsController < Devise::RegistrationsController
+  after_action :update_long_and_lat, only: :create
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -37,6 +39,16 @@ class Shop::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+  
+  private
+    def update_long_and_lat
+      result = MapQuery.new(resource.address).result
+      
+      # shopをupdate
+      resource.update(latitude: result["lat"], longitude: result["lng"])
+        # redirect_to shop_path(resource.id), alert: "エラ-"
+    
+    end
 
   # protected
 

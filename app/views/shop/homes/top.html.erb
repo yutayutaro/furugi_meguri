@@ -1,11 +1,32 @@
 <h1 class="h1-text">TOPページ</h1>
-<%= render 'maps/google_map', maps: @maps,map: @map %>
+<div id='map'></div>
+<table class="table">
+ <tbody>
+  <tr>
+         <th><%="店舗名"%></th>
+         <td><%= @shop.name%></td>
+  </tr>
+  <tr>
+         <th><%="店舗住所"%></th>
+         <td><%= @shop.address%></td>
+  </tr>
+  <tr>
+         <th><%="店舗説明"%></th>
+         <td><%= @shop.introduction%></td>
+  </tr>
+  <tr>
+         <th><%="登録メールアドレス"%></th>
+         <td><%= @shop.email%></td>
+  </tr>
+  <tr>
+         <th><%="営業時間"%></th>
+         <td><%= @shop.opening_hours%></td>
+  </tr>
+ </tbody>
+</table>
 <div>ブックマーク数</div>
 <%= @bookmarks.count%>
-<%= current_shop.name%>
-<%= current_shop.address%>
-<%= current_shop.introduction%>
-<%= current_shop.email%>
+
 <%= link_to "マイページを編集する",shop_mypage_edit_path %>
 <h3 class="h3-text">店舗画像一覧</h3>
  <div class = "row">
@@ -60,3 +81,35 @@
 
  </tbody>
 </table>
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<script>
+    let map
+
+    // mapの表示関数 
+    function initMap() {
+        geocoder = new google.maps.Geocoder()
+
+        // mapの初期位置, 縮尺を定義
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: <%= @shop.latitude%>,
+                lng: <%= @shop.longitude%>
+            },
+            zoom: 15,
+        });
+          new google.maps.Marker({
+              position:{lat: <%= @shop.latitude %>, lng: <%= @shop.longitude %>},
+              map: map
+              
+         });
+    }
+</script>    
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"  
+    async defer>
+</script>

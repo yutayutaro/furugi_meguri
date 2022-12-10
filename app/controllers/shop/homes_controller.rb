@@ -1,6 +1,7 @@
 class Shop::HomesController < ApplicationController
     before_action :authenticate_shop!
     def top
+      @shop = current_shop
       @maps = Map.all
       @map = Map.new
       @bookmarks = Bookmark.where(shop_id: current_shop.id)

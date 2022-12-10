@@ -51,3 +51,4 @@
      <%= paginate @bookmarks%>
  </tbody>
 </table>
+<%= link_to "このアカウントを削除する", "/admin/unsubscribe/customer/#{@customer.id}",class: "btn btn-danger" %>

@@ -1,4 +1,5 @@
 <h1 class="h1-text">登録店舗情報</h1>
+<div id='map'></div>
 <table class="table">
  <tbody>
   <tr>
@@ -57,3 +58,36 @@
   <%= paginate @blogs%>
  </tbody>
 </table>
+<%= link_to "このアカウントを削除する", "/admin/unsubscribe/shop/#{@shop.id}",class: "btn btn-danger" %>
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<script>
+    let map
+
+    // mapの表示関数 
+    function initMap() {
+        geocoder = new google.maps.Geocoder()
+
+        // mapの初期位置, 縮尺を定義
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: <%= @shop.latitude%>,
+                lng: <%= @shop.longitude%>
+            },
+            zoom: 15,
+        });
+          new google.maps.Marker({
+              position:{lat: <%= @shop.latitude %>, lng: <%= @shop.longitude %>},
+              map: map
+              
+         });
+    }
+</script>    
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"  
+    async defer>
+</script>

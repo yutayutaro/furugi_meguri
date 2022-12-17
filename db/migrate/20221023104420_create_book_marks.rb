@@ -3,8 +3,8 @@ class CreateBookMarks < ActiveRecord::Migration[6.1]
     create_table :book_marks do |t|
 
       t.timestamps
-      t.references :customer_id, foreign_key: true, null: false
-      t.references :shop_id, foreign_key: true, null: false
+      t.references :customer, foreign_key: true, null: false
+      t.references :shop, foreign_key: true, null: false
     end
   end
 end

@@ -30,6 +30,14 @@ class Shop < ApplicationRecord
       @shop = Shop.all
     end
   end
+  
+  def self.address_search(address_keyword)
+    unless address_keyword.blank?
+      Shop.where(['address LIKE ?', "%#{address_keyword}%"])
+    else
+      Shop.all
+    end
+  end
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

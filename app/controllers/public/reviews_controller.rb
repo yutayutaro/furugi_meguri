@@ -1,7 +1,7 @@
 class Public::ReviewsController < ApplicationController
         before_action :authenticate_customer!, except: [:index,:show]
         def index
-         @reviews =Review.page(params[:page])
+         @reviews =Review.page(params[:page]).per(5)
         end
         def show
          @review = Review.find(params[:id])
@@ -25,11 +25,14 @@ class Public::ReviewsController < ApplicationController
          @review = Review.find(params[:id])   
         end
         def update
+            review = Review.find(params[:id])
+            review.update(review_params)
+            redirect_to  review_path(params[:id])
         end
         def destroy
             review = Review.find(params[:id])
             review.destroy
-            redirect_to  shop_reviews_path
+            redirect_to  reviews_path
         end
         private
   def review_params

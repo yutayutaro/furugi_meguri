@@ -30,7 +30,7 @@ class Shop::SessionsController < Devise::SessionsController
      if shop.is_deleted == false
        super
      else
-       redirect_to root_path
+       redirect_to shop_root_path,notice: "既に退会済みです"
      end
    end
 

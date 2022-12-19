@@ -8,9 +8,9 @@
   </tr>
   <tr>
    <th><%= photo.label :introduction,"説明"%></th>
-   <td><%= f.text_area :introduction %></td>
+   <td><%= photo.text_area :introduction %></td>
   </tr>
  </tbody>
 </table>
-<%= f.submit '変更を保存する',class: "btn btn-success"%>
+<%= photo.submit '変更を保存する',class: "btn btn-success"%>
 <% end %>

@@ -5,18 +5,18 @@
    <th><%= "投稿者"%></th>
    <th><%= "タイトル"%></th>
    <th><%= "作成日時"%></th>
+   <th><%= ""%></th>
   </tr>
  </thead>
  <tbody>
-  <tr>
    <% @reviews.each do |review|%>
+  <tr>
    <td><%=review.customer.nickname %></td>
-   <td><%= link_to shop_review_path(review.id) do %>
-      <%=review.title%></td>
-      <% end %>
+   <td><%=review.title%></td>
    <td><%= review.created_at.strftime("%Y/%m/%d")%></td>
+   <td><%= link_to"詳細ページへ", shop_review_path(review.id) %></td>
   </tr>
   <% end %>
-  <%= paginate @reviews %>
  </tbody>
 </table>
+  <%= paginate @reviews %>

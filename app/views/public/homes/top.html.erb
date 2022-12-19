@@ -1,4 +1,25 @@
- <%= render 'maps/google_map', maps: @maps,map: @map %>
+ <%= render 'maps/google_map', {maps: @maps,map: @map, shops: @shops} %>
+<p id="notice"><%= notice %></p>
+<h3 class="h3-text" >店舗一覧</h3>
+ <table class="table">
+  <thead>
+   <tr>
+    <th><%="店舗名"%></th>
+    <th><%="住所"%></th>
+    <th><%= ""%></th>
+   </tr>
+  </thead>
+  <tbody>
+    <% @shops.each do |shops|%>
+   <tr>
+    <td><%= shops.name %></td>
+    <td><%= shops.address%></td>
+    <td><%=link_to"詳細ページへ", store_path(shops.id)%></td>
+   </tr>
+  </tbody>
+  <% end %>
+  </table>
+  <%= paginate @shops%>
  <% if customer_signed_in? %>
 <h3 class="h3-text">ブックマーク店舗画像一覧</h3>
 <table class="table">
@@ -19,18 +40,16 @@
    <td><%=photo.created_at.strftime("%Y/%m/%d")%></td>
   </tr>
   <% end %>
-  <% paginate @shop_photos %>
  </tbody>
 </table>
+<%= paginate @shop_photos %>
  <table>
   <tbody>
    <tr>
     <th><%= "ブックマーク店舗数数"%></th>
     <td><%= link_to stores_path do%>
          <%=@bookmarks.count%>
-         <% end %>
-         <%="店舗ブックマーク中"%></td>
-         
+         <% end %></td>
    </tr>
   </tbody>
  </table>
@@ -51,9 +70,10 @@
   </tr>
        <% end %>
        <% end %>
-       <%= paginate @bookmarks %>
+       
  </tbody>
 </table>
+<%= paginate @bookmarks %>
 <h3 class="h3-text">ブックマーク店舗ブログ一覧</h3>
 <table class="table">
  <thead>
@@ -75,9 +95,9 @@
   </tr>
        
        <% end %>
-       <%= paginate @blog %>
+      
  </tbody>
 </table>
-
+ <%= paginate @blog %>
 <% else %>
 <% end %>

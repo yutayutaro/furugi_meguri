@@ -3,18 +3,18 @@
  <thead>
   <tr>
    <th><%="作成日時"%></th>
-   <th><%="タイトル"%></th>        
+   <th><%="タイトル"%></th>     
+   <th><%= ""%></th>
   </tr> 
  </thead>
  <tbody>
   <tr>
-   <% @blogs.each  do |blogs|%>  
+   <% @blogs.each do |blogs|%>  
    <td><%= blogs.created_at.strftime("%Y/%m/%d")%></td>
-   <td><%= link_to shop_blog_path(blogs.id) do %>
-       <%= blogs.title %></td>
+   <td><%= blogs.title %></td>
+   <td><%= link_to"詳細ページへ", shop_blog_path(blogs.id) %></td>
   </tr>
 <% end %>
-<% end %>
-<%= paginate @blogs %>
  </tbody>
 </table>
+<%= paginate @blogs %>

@@ -37,12 +37,14 @@
                         position:{lat: <%= shop.latitude %>, lng: <%= shop.longitude %>},
                         map: map
                     });
+ 
                     <% mapNotFlg = false %>
                 <% else %>
                     new google.maps.Marker({
                         position:{lat: <%= shop.latitude %>, lng: <%= shop.longitude %>},
                         map: map
                     });
+
                 <% end %>
             <% end %>
         <% end %>

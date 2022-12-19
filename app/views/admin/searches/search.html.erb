@@ -1,28 +1,39 @@
-<table class="table table-hover table-inverse">
+<table class="table">
   <% if @range == "Shop" %>
+  <thead>
+    <tr>
+      <th><%= "店舗名"%></th>
+      <th><%= "住所"%></th>
+      <th><%= ""%></th>
+    </tr>
+  </thead>
     <tbody>
       <% @shops.each do |shop| %>
         <tr>
-          <td>
-          <%= link_to admin_shop_path(shop.id) do %>
-          <%= shop.name %>
-          <% end %>
-          </td>
+          <td><%= shop.name %></td>
+          <td><%= shop.address%></td>
+          <td><%= link_to"詳細ページへ", admin_shop_path(shop.id) %></td>
         </tr>
       <% end %>
     </tbody>
+  </table>
   <% else %>
+  <table class="table">
+    <thead>
+     <tr>
+       <th><%= "ニックネーム"%></th>
+       <th><%= "email"%></th>
+       <th><%= ""%></th>
+     </tr>
+    </thead>
     <tbody>
       <% @customers.each do |customer| %>
         <tr>
-          <td>
-          <%= link_to admin_customer_path(customer.id) do%>
-          <%= customer.nickname %>
-          <% end %>
-          </td>
+          <td><%= customer.nickname %></td>
           <td><%= customer.email %></td>
+          <td><%= link_to"詳細ページへ", admin_customer_path(customer.id) %></td>
         </tr>
       <% end %>
     </tbody>
-  <% end %>
 </table>
+<% end %>

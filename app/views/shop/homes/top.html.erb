@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <h1 class="h1-text">TOPページ</h1>
 <div id='map'></div>
 <table class="table">
@@ -24,63 +25,79 @@
   </tr>
  </tbody>
 </table>
-<div>ブックマーク数</div>
-<%= @bookmarks.count%>
+ <table>
+  <tbody>
+   <tr>
+    <th><%= "ブックマーク数"%></th>
+    <td><%= @bookmarks.count%></td>
+    </tr>
+  </tbody>
+ </table>
 
-<%= link_to "マイページを編集する",shop_mypage_edit_path %>
+
+<%= link_to "マイページを編集する",shop_mypage_edit_path,class: "btn btn-warning" %>
 <h3 class="h3-text">店舗画像一覧</h3>
- <div class = "row">
-  <div class = "col-xs-3">
-<% @shop_photos.each do |photo|%>
-<%= link_to shop_shop_photo_path(photo.id) do %>
-<%= image_tag photo.image %>
-<% end %>
-<% end %>
-  </div>
- </div>
+  <table class="table">
+   <thead>
+    <tr>
+     <th><%= "作成日時"%></th>
+     <th><%= "画像"%></th>
+     <th><%= ""%></th>
+    </tr>
+   </thead>
+   <tbody>
+    <% @shop_photos.each do |photo|%>
+    <tr>
+     <td><%= photo.created_at.strftime("%Y/%m/%d")%></td>
+     <td><%= image_tag photo.image %></td>
+     <td><%= link_to "詳細ページへ",shop_shop_photo_path(photo.id) %></td>
+    </tr>
+    <% end %>
+   </tbody>
+  </table>
+  <%= paginate @shop_photos%> 
+  <!--</div>-->
+ <!--</div>-->
 <h3 class="h3-text">ブログ一覧</h3>
 <table class="table">
  <thead>
   <tr>
    <th><%="作成日時"%></th>
-   <th><%="タイトル"%></th>        
+   <th><%="タイトル"%></th>
+   <th><%=""%></th>
   </tr>
  </thead>
  <tbody>
+  <% @blogs.each do |blog|%>
   <tr>
-      <% @blogs.each do |blog|%>
    <th><%= blog.created_at.strftime("%Y/%m/%d")%></th>
-   <td><%= link_to shop_blog_path(blog.id) do %>
-       <%= blog.title%></td>
+   <td><%= blog.title%></td>
+   <td><%= link_to"詳細ページへ", shop_blog_path(blog.id) %></td>
   </tr>
     <% end %>
-    <% end %>
-    <%=  paginate @blogs %>
   </tbody>
   </table>
-  
-    
+    <%= paginate @blogs %>
 <h3 class="h3-text">レビュー一覧</h3>
 <table class="table">
  <thead>
   <tr>
    <th><%="作成日時"%></th>
-   <th><%="タイトル"%></th>        
+   <th><%="タイトル"%></th> 
+   <th><%= ""%></th>
   </tr>
  </thead>
  <tbody>
+  <% @reviews.each do  |review| %>
   <tr>
-    <% @reviews.each do  |review| %>
    <th><%= review.created_at.strftime("%Y/%m/%d")%></th>
-   <td> <%= link_to shop_review_path(review.id) do %>
-        <%= review.title %></td>
+   <td><%= review.title %></td>
+   <td><%= link_to"詳細ページへ", shop_review_path(review.id) %></td>     
   </tr>
     <% end %>
-    <% end %>
-    <%=  paginate @reviews %>
-
  </tbody>
 </table>
+  <%= paginate @reviews %>
 <style>
     #map {
         height: 400px;

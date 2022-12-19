@@ -3,22 +3,7 @@
 <% end %>
 <h2><%=@store.name+"のページ"%></h2>
 <div id='map'></div>
-
-
 <%=@store.address%>
-
-
-<h3>店舗画像</h3>
-<% @store_photo.each do |f| %>
-<% if f.image.attached? %>
-<%= link_to store_photo_path(f.id) do%>
-<%= image_tag f.image%>
-<% end %>
-<% paginate @store_photo %>
-<% else %>
-<% end %>
-
-<% end %>
 <h3 class="h3-text">店舗情報</h3>
 <table class="table">
  <tbody>
@@ -30,32 +15,54 @@
    <th><%= "営業時間"%></th>  
    <td><%= @store.opening_hours%></td>
   </tr>
+    <% if @store.link.present? %>
   <tr>
    <th><%= "リンク"%></th>  
-   <td><%= ""%></td>
+   <td><%= link_to "ホームページ", @store.link %></td>
   </tr>
+     <% end %>
   </tbody>
  </table>
+<h3 class="h3-text">店舗画像</h3>
+<table class="table">
+ <thead>
+  <tr>
+   <th><%="作成日時"%></th>
+   <th><%="店舗画像"%></th>
+   <th><%=""%></th>
+  </tr>
+ </thead>
+ <tbody>
+   <% @store_photo.each do |f| %>
+  <tr>
+    <td><%= f.created_at.strftime("%Y/%m/%d")%></td>
+    <td><%= image_tag f.image%></td>
+    <td><%= link_to"詳細ページへ", store_photo_path(f.id) %></td>
+  </tr>
+　<% end %>　
+ </tbody>
+</table>
+<%= paginate @store_photo %>
 <h3 class="h3-text">ブログ</h3>
 <table class="table">
  <thead>
   <tr>
    <th><%="作成日時"%></th>
-   <th><%="タイトル"%></th>        
+   <th><%="タイトル"%></th>
+   <th><%=""%></th>
   </tr>
  </thead>
  <tbody>
-  <tr>
     <% @blog.each do |blog| %>
+  <tr>
    <th><%= blog.created_at.strftime("%Y/%m/%d")%></th>
-   <td><%= link_to blog_path(blog.id) do %>
-       <%= blog.title%></td>
+   <td><%= blog.title%></td>
+   <td><%= link_to"詳細ページへ", blog_path(blog.id) %></td>
   </tr>
     <% end %>
-    <% end %>
-    <%=  paginate @blog %>
  </tbody>
 </table>
+<%=  paginate @blog %>
 <% if customer_signed_in? %>
 <%=link_to "レビューする",  new_review_path,class: "btn btn-success"  %>
 <% if @store.bookmarked_by?(current_customer) %>

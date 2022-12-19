@@ -1,18 +1,28 @@
 <% unless @search_word.blank? %>
     <h1 class="h1-text"><%= @search_word %>の検索結果</h1>
 <% else %>
-    <h2>全件結果</h2>
+    <h1 class="h1-text">全件結果</h1>
 <% end %>
 
 <% if @shops.count == 0 %>
     <p>検索結果はありませんでした。</p>
 <% else %>
-<%= @shops.count%>件
-    <% @shops.each do |shop| %>
-        <div>
-            <%= link_to store_path(shop.id) do%>
-            <%= shop.name %>
-            <% end %>
-        </div>
-    <% end %>
+<h3 class="h3-text"><%= @shops.count%>件</h3>
+    <table class="table">
+    <thead>
+        <tr>
+            <th><%="店舗名"%></th>
+            <th><%="住所"%></th>
+        </tr>
+    </thead>    
+    <tbody>
+            <% @shops.each do |shop| %>
+        <tr>
+            <td><%= shop.name%></td>
+            <td><%= shop.address%></td>
+            <td> <%= link_to"詳細ページへ", store_path(shop.id) %></td>
+        </tr>
+          <% end %>
+     </tbody>    
+    </table>
 <% end %>

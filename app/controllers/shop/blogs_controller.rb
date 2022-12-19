@@ -4,7 +4,7 @@ class Shop::BlogsController < ApplicationController
           @blog = Blog.new
       end
       def index
-          @blogs = Blog.page(params[:page])
+          @blogs = Blog.page(params[:page]).per(5)
       end
       def create
           @blog = Blog.new(blog_params)
@@ -22,7 +22,6 @@ class Shop::BlogsController < ApplicationController
           @blog = Blog.find(params[:id])
       end
       def update
-          
           blog = Blog.find(params[:id])
           blog.update(blog_params)
           redirect_to shop_blog_path(params[:id])

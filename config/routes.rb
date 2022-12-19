@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       root "homes#top" 
       get '/mypage' => "mypages#show"
       get '/mypage/edit' => "mypages#edit"
+      patch '/mypage/edit' => "mypages#update"
       get 'unsubscribe/:id' => 'homes#unsubscribe', as: 'confirm_unsubscribe'
       patch ':id/withdraw' => 'homes#withdraw', as: 'withdraw_shop'
       put 'withdraw/:name' => 'shops#withdraw'

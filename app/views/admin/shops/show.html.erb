@@ -31,12 +31,12 @@
    <td><%=shopphoto.created_at.strftime("%Y/%m/%d")%></td>
    <td>
         <%=image_tag shopphoto.image%></td>
-   <td><%= link_to"詳細ページへ行く", admin_shop_photo_path(shopphoto.id)  %></td>     
+   <td><%= link_to"詳細ページへ", admin_shop_photo_path(shopphoto.id)  %></td>     
   </tr> 
   <% end %>
-  <%= paginate @shop_photos %>
  </tbody>    
 </table>
+  <%= paginate @shop_photos %>
 <h3 class="h3-text">ブログ一覧</h3>
 <table class = "table">
  <thead>
@@ -55,9 +55,9 @@
   </tr>
 
   <% end %>
-  <%= paginate @blogs%>
  </tbody>
 </table>
+  <%= paginate @blogs%>
 <%= link_to "このアカウントを削除する", "/admin/unsubscribe/shop/#{@shop.id}",class: "btn btn-danger" %>
 <style>
     #map {

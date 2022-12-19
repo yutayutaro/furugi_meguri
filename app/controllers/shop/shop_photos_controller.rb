@@ -12,7 +12,7 @@ class Shop::ShopPhotosController < ApplicationController
     end
     end
     def index
-        @photo = ShopPhoto.page(params[:page])
+        @photo = ShopPhoto.page(params[:page]).per(5)
     end
     def show
         @photo = ShopPhoto.find(params[:id])

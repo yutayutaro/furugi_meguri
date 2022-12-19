@@ -20,11 +20,11 @@ end
   # POST /resource/sign_in
   def create
     # byebug
-    customer = Customer.find_by(email: params.require(:customer).permit(:email)[:email])
+    customer = Customer.find_by(email: params[:customer][:email])
     if customer.is_deleted == false
       super
     else
-      redirect_to root_path
+      redirect_to root_path, notice: "既に退会済みです"
     end
   end
 

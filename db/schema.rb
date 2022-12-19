@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_04_140955) do
+ActiveRecord::Schema.define(version: 2022_12_18_073754) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2022_12_04_140955) do
     t.string "opening_hours"
     t.float "longitude"
     t.float "latitude"
+    t.string "link"
     t.index ["email"], name: "index_shops_on_email", unique: true
     t.index ["reset_password_token"], name: "index_shops_on_reset_password_token", unique: true
   end

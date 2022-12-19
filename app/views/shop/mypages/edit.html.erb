@@ -1,0 +1,23 @@
+<%= form_with model: @shop, url: shop_mypage_edit_path,method: :patch do |shop| %>
+<table class="table">
+ <tbody>
+  <tr>
+   <th><%= shop.label :name,"店舗名"%></th>
+   <td><%= shop.text_field :name %></td>
+  </tr>
+  <tr>
+   <th><%= shop.label :email,"メール"%></th>
+   <td><%= shop.text_field :email%></td>
+  </tr>
+    <tr>
+   <th><%= shop.label :introduction,"店舗説明"%></th>
+   <td><%= shop.text_area :introduction%></td>
+  </tr>
+    <tr>
+   <th><%= shop.label :link,"ホームページリンク"%></th>
+   <td><%= shop.text_field :link%></td>
+  </tr>
+ </tbody>
+</table>
+<%= shop.submit'変更を保存する',class: "btn btn-success"%>
+<% end %>

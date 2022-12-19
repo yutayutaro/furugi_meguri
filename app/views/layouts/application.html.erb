@@ -12,13 +12,26 @@
   </head>
 
   <body>
+      
       <header>
           <h2>Furugi.Meguri</h2>
         <% if customer_signed_in? %>
-         <%= form_with url: search_path, method: :get, local: true do |f| %>
-         <%= f.text_field :keyword, placeholder: 'キーワードから探す' %>
-         <%= f.submit %>
-         <% end %>
+        <table>
+          <tbody>
+              <tr>
+                 <td><%= form_with url: search_path, method: :get, local: true do |f| %>
+                     <%= f.text_field :keyword, placeholder: '店舗名検索' %>
+                     <%= f.hidden_field :search_method,value: "keyword", placeholder: '店舗名検索' %>
+                     <%= f.submit %>
+                     <% end %></td>
+                 <td><%= form_with url: search_path, method: :get, local: true do |f| %>
+                     <%= f.text_field :address_keyword, placeholder: '住所検索' %>
+                     <%= f.hidden_field :search_method,value: "address", placeholder: '店舗名検索' %>
+                     <%= f.submit %>
+                     <% end %></td>
+              </tr>
+          </tbody>
+         </table>
         <div id="sp-menu">
          <h2>MENU</h2>
          <ul>
@@ -75,16 +88,29 @@
             <%elsif request.path.start_with?('/admin') %>
                
             <%else%>
-            <%= form_with url: search_path, method: :get, local: true do |f| %>
-            <%= f.text_field :keyword, placeholder: 'キーワードから探す' %>
-            <%= f.submit %>
-            <% end %>
+        <table>
+          <tbody>
+              <tr>
+                 <td><%= form_with url: search_path, method: :get, local: true do |f| %>
+                     <%= f.text_field :keyword, placeholder: '店舗名検索' %>
+                     <%= f.hidden_field :search_method,value: "keyword", placeholder: '店舗名検索' %>
+                     <%= f.submit %>
+                     <% end %></td>
+                 <td><%= form_with url: search_path, method: :get, local: true do |f| %>
+                     <%= f.text_field :address_keyword, placeholder: '住所検索' %>
+                     <%= f.hidden_field :search_method,value: "address", placeholder: '店舗名検索' %>
+                     <%= f.submit %>
+                     <% end %></td>
+              </tr>
+          </tbody>
+         </table>        
       <div id="sp-menu">
          <h2>MENU</h2>
          <ul>
           <li><%= link_to "ログイン",new_customer_session_path,class: "box" %></li>
           <li><%= link_to "about", about_path,class: "box" %></li>
           <li><%= link_to "新規会員登録",new_customer_registration_path ,class: "box"%></li>
+          <li><%= link_to "店舗ログイン",shop_root_path ,class: "box"%></li>
          </ul>
         </div>
 
@@ -98,6 +124,7 @@
              <% end %>
         <% end %>
       </header>
+       <%= render 'shared/flash_message' %>
       <div class= "container">
       <div class="mx-auto" style="width: 100%;">   
       <%= yield %>

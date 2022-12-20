@@ -1,3 +1,4 @@
+<% if @review.customer.is_deleted == false %>
 <h1 class="h1-text">レビュー詳細画面</h1>
 <table class = "table">
  <tbody>
@@ -31,3 +32,6 @@
  </tbody>
 </table>
 <%=link_to '削除する', admin_review_path(@review.id), method: :delete,class: "btn btn-danger" %>
+<% else %>
+<h3 class = "h3-text">このアカウントは削除されています</h3>
+<% end %>

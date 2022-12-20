@@ -1,5 +1,8 @@
 <table class="table">
   <% if @range == "Shop" %>
+   <% if @shops.count == 0%>
+   <h3 class="h3-text">検索結果はありませんでした。</h3>
+   <% else %>
   <thead>
     <tr>
       <th><%= "店舗名"%></th>
@@ -17,7 +20,11 @@
       <% end %>
     </tbody>
   </table>
+  <% end %>
   <% else %>
+   <% if @customers.count == 0%>
+   <h3 class="h3-text">検索結果はありませんでした。</h3>
+   <% else %>
   <table class="table">
     <thead>
      <tr>
@@ -36,4 +43,5 @@
       <% end %>
     </tbody>
 </table>
+ <% end %>
 <% end %>

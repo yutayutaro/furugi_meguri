@@ -1,4 +1,5 @@
 <%= link_to '一覧へ戻る',reviews_path,class: "btn btn-primary"%>
+<% if @review.shop.is_deleted == false%>
 <h1 class="h1-text">レビュー詳細画面</h1>
 <table class="table">
  <tbody>
@@ -32,3 +33,6 @@
 </table>
 <%= link_to"編集する",edit_review_path(@review.id),class: "btn btn-warning" %>
 <%= link_to"削除する",review_path(@review.id), method: :delete,class: "btn btn-danger" %>
+<% else %>
+<h1 class="h1-text">このアカウントは削除されました。</h1>
+<% end %>

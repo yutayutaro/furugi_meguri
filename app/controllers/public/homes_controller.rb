@@ -5,9 +5,9 @@ class Public::HomesController < ApplicationController
         @all_cafe_position = Shop.all.pluck(:latitude, :longitude).to_json
         @shops = Shop.page(params[:page]).per(5)
   if customer_signed_in? 
-    @bookmarks =Bookmark.where(customer_id: current_customer.id).page(params[:page]).per(5)
-    @blog = Blog.where(shop_id: @bookmarks.pluck(:shop_id)).page(params[:page]).per(5)
-    @shop_photos = ShopPhoto.where(shop_id: @bookmarks.pluck(:shop_id)).page(params[:id]).per(5)
+    @bookmarks =Bookmark.where(customer_id: current_customer.id).includes(:shop).page(params[:bookmarks_page]).per(5)
+    @blog = Blog.where(shop_id: @bookmarks.pluck(:shop_id)).page(params[:blog_page]).per(5)
+    @shop_photos = ShopPhoto.where(shop_id: @bookmarks.pluck(:shop_id)).page(params[:shop_photos_page]).per(5)
     @shops = Shop.page(params[:page]).per(5)
   end
  end

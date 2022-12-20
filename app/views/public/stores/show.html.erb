@@ -1,6 +1,7 @@
 <% if customer_signed_in? %>
 <%= link_to '一覧へ戻る',stores_path, class: "btn btn-primary" %>
 <% end %>
+<% if @store.is_deleted == false%>
 <h2><%=@store.name+"のページ"%></h2>
 <div id='map'></div>
 <%=@store.address%>
@@ -103,3 +104,6 @@
     src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"  
     async defer>
 </script>
+<% else %>
+<h1 class= "h1-text">このアカウントは削除済みです</h1>
+<% end %>

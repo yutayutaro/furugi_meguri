@@ -8,17 +8,16 @@ class Public::ReviewsController < ApplicationController
         end
         def new
         @review =Review.new
-        #  bookmark = Bookmark.find_by(customer_id: current_customer.id)
-        #  @shop = Shop.where(bookmark_id: bookmark.id)
         @shops = Shop.where(id: current_customer.bookmarks.pluck(:shop_id))
         end  
         def create
           @review = Review.new(review_params)
           @review.customer_id = current_customer.id
-          if@review.save
-          redirect_to review_path(@review.id)
+          if @review.save
+             redirect_to review_path(@review.id)
           else
-          render :new
+              @shops = Shop.where(id: current_customer.bookmarks.pluck(:shop_id))
+              render :new
           end
         end        
         def edit

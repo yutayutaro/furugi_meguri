@@ -27,10 +27,10 @@ class Shop::SessionsController < Devise::SessionsController
    def create
      # byebug
      shop = Shop.find_by(email: params.require(:shop).permit(:email)[:email])
-     if shop.is_deleted == false
+     if !shop || shop.is_deleted == false 
        super
      else
-       redirect_to shop_root_path,notice: "既に退会済みです"
+       redirect_to new_shop_session_path,notice: "既に退会済みです"
      end
    end
 

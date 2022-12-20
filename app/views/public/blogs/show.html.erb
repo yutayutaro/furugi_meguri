@@ -3,6 +3,7 @@
 <% else %>
 <%= link_to"店舗詳細画面へ",store_path(@blog.shop.id),class: "btn btn-primary" %>
 <% end %>
+<% if @blog.shop.is_deleted == false %>
 <h1 class="h1-text">ブログ詳細画面</h1>
 <table class="table">
  <tbody>
@@ -34,3 +35,6 @@
   </tr>
  </tbody>
 </table>
+<% else %>
+<h1 class="h1-text">削除済みのアカウントです。</h1>
+<% end %>

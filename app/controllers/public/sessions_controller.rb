@@ -21,10 +21,10 @@ end
   def create
     # byebug
     customer = Customer.find_by(email: params[:customer][:email])
-    if customer.is_deleted == false
+    if !customer ||customer.is_deleted == false
       super
     else
-      redirect_to root_path, notice: "既に退会済みです"
+      redirect_to new_customer_session_path, notice: "既に退会済みです"
     end
   end
 

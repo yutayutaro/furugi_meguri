@@ -14,13 +14,13 @@ has_many :followers, through: :reverse_of_relationships, source: :follower
          :recoverable, :rememberable, :validatable
    def self.looks(search, word)
     if search == "perfect_match"
-      @customer = Customer.where("email LIKE?","#{word}")
+      @customer = Customer.where("nickname LIKE?","#{word}")
     elsif search == "forward_match"
-      @customer = Customer.where("email LIKE?","#{word}%")
+      @customer = Customer.where("nickname LIKE?","#{word}%")
     elsif search == "backward_match"
-      @customer = Customer.where("email LIKE?","%#{word}")
+      @customer = Customer.where("nickname LIKE?","%#{word}")
     elsif search == "partial_match"
-      @customer = Customer.where("email LIKE?","%#{word}%")
+      @customer = Customer.where("nickname LIKE?","%#{word}%")
     else
       @customer = Customer.all
     end

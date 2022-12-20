@@ -1,4 +1,5 @@
 <%= link_to '一覧へ戻る',shop_blogs_path,class: "btn btn-primary" %>
+<% if @blog.shop.is_deleted == false %>
 <h1 class="h1-text">ブログ詳細画面</h1>
 <table class="table">
  <tbody>
@@ -26,3 +27,6 @@
 </table>
 <%=link_to '編集する', edit_shop_blog_path(params[:id]),class: "btn btn-warning"%>
 <%=link_to '削除する', shop_blog_path(params[:id]), method: :delete,class: "btn btn-danger" %>
+<% else %>
+<h1 class="h1-text">削除済みのアカウントです。</h1>
+<% end %>

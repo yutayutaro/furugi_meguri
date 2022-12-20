@@ -36,7 +36,7 @@
   <% end %>
  </tbody>    
 </table>
-  <%= paginate @shop_photos %>
+  <%= paginate @shop_photos, param_name: 'shopphoto_page'  %>
 <h3 class="h3-text">ブログ一覧</h3>
 <table class = "table">
  <thead>
@@ -57,8 +57,12 @@
   <% end %>
  </tbody>
 </table>
-  <%= paginate @blogs%>
+  <%= paginate @blogs, param_name: 'blog_page' %>
+  <% if @shop.is_deleted == false %>
 <%= link_to "このアカウントを削除する", "/admin/unsubscribe/shop/#{@shop.id}",class: "btn btn-danger" %>
+  <% else %>
+  <h3 class = "h3-text">このアカウントは削除されています</h3>
+  <% end %>
 <style>
     #map {
         height: 400px;
